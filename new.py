@@ -8,7 +8,7 @@ class average :
         self.var = len(self.message.split())
         average.avg = (average.avg + self.var)/ average.count
         average.count+=1
-        print average.avg
+        print ("Average of sending words: "+str(average.avg))
 
 
 

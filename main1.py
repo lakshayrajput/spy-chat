@@ -23,12 +23,13 @@ def add_Friend():
             spy.salutation = raw_input("Please enter a valid salutation \" Mr or Ms. \": ")
 
     spy.salutation = 'M' + spy.salutation[1:]
+    spy.salutation = spy.salutation + "."
     while len(spy.name) <= 0:
         spy.name = raw_input("Please enter valid name: ")
 
-        spy.name = spy.salutation + " " + spy.name
+        #spy.name = spy.salutation + " " + spy.name
         print("Welcome " + spy.name)
-    spy.name = spy.salutation + " " + spy.name
+    #spy.name = spy.salutation + " " + spy.name
 
     confirmAge = raw_input(
         "Press 'Y' if you are in b/w (12 - 50) years,otherwise press any other key..: ")
@@ -47,7 +48,7 @@ def add_Friend():
         spyIsOnline = True
         # -----------------ADDING THE NEW SPY TO THE SPY FRIEND-LIST----------------#
         friends.append(spy)
-        print("Now your friend '"+spy.name+"' is online..")
+        print("Now "+spy.salutation+". " +spy.name+" has been added to your friend-list..")
 
         # ---------------TOTAL NO OF FRIENDS----------------------#
         total_Friends = len(friends)
@@ -75,13 +76,17 @@ else :
     while spy.name.isalpha() == False:
         spy.name = raw_input("Name contains only'A-Z' or 'a-z' alphabets.Please enter again: ")
     spy.salutation = raw_input("Which one would you prefer Mr or Ms. :")
+    value = True
+    while value:
+        if spy.salutation == 'mr' or spy.salutation == 'Mr' or spy.salutation == 'MR' or spy.salutation == 'ms' or spy.salutation == 'Ms' or spy.salutation == 'MS':
+            value = False
+        else:
+            spy.salutation = raw_input("Please enter a valid salutation \" Mr or Ms. \": ")
     spy.salutation = 'M' + spy.salutation[1:]
 
     while len(spy.name) <= 0:
         spy.name = raw_input("Please enter valid name: ")
-        spy.name = spy.salutation + " " + spy.name
-        print("Welcome " + spy.name)
-    spy.name = spy.salutation + " " + spy.name
+        print("Welcome " + spy.salutation + spy.name)
 
     confirmAge = raw_input("Press 'Y' if you are in b/w (12 - 50) years,otherwise press any other key..")
     if confirmAge.upper() != 'Y':
@@ -98,7 +103,7 @@ else :
 
         print("\n")
         spyIsOnline = True
-        print("Welcome--" + spy.name + "\n" + "         Age: " + str(
+        print("Welcome--" +spy.salutation+" "+ spy.name + "\n" + "         Age: " + str(
             spy.age) + "\n" + "         Rating: " + str(spy.rating) + "\n     " + "\"***Proud to have you with us***\""+"\n")
 
     print("-----------------------------------------------------------------------------------------------------")
@@ -147,7 +152,9 @@ def select_a_Friend() :
 def send_a_secretMessage() :
     select = select_a_Friend()
     org_Img = "C:\Users\Lakshay Rajput\PycharmProjects\untitled\\z.JPG"
-    new_Img = raw_input("New name of the image with \".JPG\" format: ")
+    new_Img = raw_input("New name of the image with \".jpg\" format: ")
+    if '.jpg' not in new_Img or '.JPG' not in new_Img :
+        new_Img = new_Img + ".jpg"
     new_Img = "C:\Users\Lakshay Rajput\PycharmProjects\untitled\\" +new_Img
     text = raw_input("Enter the message you wanna send to your friend, if you need help,then you can use these special words(SOS,SM,FITH,CM): ")
     while len(text) <=0  :
@@ -170,6 +177,8 @@ def read_message() :
         sender = select_a_Friend()
         receiver = sender
         output_path = raw_input("What is the name of the file?.Enter with \".JPG\" format: ")
+        if '.jpg' not in output_path or '.JPG' not in output_path:
+            output_path = output_path + ".jpg"
         output_path = "C:\Users\Lakshay Rajput\PycharmProjects\untitled\\" +output_path
         secret_text = Steganography.decode(output_path)
         print("\n")
@@ -231,7 +240,6 @@ def chatHistory():
             print("     DATE:           TIME:           SENDER/RECEIVER:")
             print("[%s] [%s] , %s %s: %s" % (chat.time.strftime("%d %B %Y"), Fore.BLUE + chat.time.strftime(" %H:%M:%S"), Fore.RED + spy.name ,Fore.BLACK + "said : ",chat.message))
         else:
-            print("DATE:       TIME:       SENDER/RECEIVER:")
             print("[%s] [%s] , %s %s: %s" % (
             chat.time.strftime("%d %B %Y"), Fore.BLUE + chat.time.strftime(" %H:%M:%S"), Fore.RED + friends[read_for].name,
             Fore.BLACK + "said : ", chat.message))
