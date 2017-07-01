@@ -176,7 +176,7 @@ def read_message() :
 
         sender = select_a_Friend()
         receiver = sender
-        output_path = raw_input("What is the name of the file?.Enter with \".JPG\" format: ")
+        output_path = raw_input("What is the name of the file?.Enter with \".jpg\" format: ")
         if '.jpg' not in output_path or '.JPG' not in output_path:
             output_path = output_path + ".jpg"
         output_path = "C:\Users\Lakshay Rajput\PycharmProjects\untitled\\" +output_path
